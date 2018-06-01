@@ -1,10 +1,10 @@
 # Site settings
-title: 
+title: Code Trip
 header-img: img/home-bg.png
 email: jluk87@gmail.com
 copyright_name: gitluky
 description: > # this means to ignore newlines until "baseurl:"
-  
+  Lessons learned as I dive deeper into the world of development
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
 github_username:  gitluky
