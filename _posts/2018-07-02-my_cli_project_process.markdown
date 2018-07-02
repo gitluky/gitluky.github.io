@@ -26,7 +26,7 @@ In this post I will I will both outline the process of how I created the [edm_fe
 
 ### **Building edm_festival_finder**
 
-**    The first thing I started to code was the CLI class, I wanted to paint a picture of how the user would interact with the application. I broke down each step the user would take to eventually get to the details of each festival and thought of the methods I would need to get there. Here was my thought process and how I figured what I needed to build:**
+   The first thing I started to code was the CLI class, I wanted to paint a picture of how the user would interact with the application. I broke down each step the user would take to eventually get to the details of each festival and thought of the methods I would need to get there. Here was my thought process and how I figured what I needed to build:**
 		
 **1) after running the application, the user will land on the title screen and be prompted to press enter**
 	    a) I will need a call method in the CLI class to start the application
