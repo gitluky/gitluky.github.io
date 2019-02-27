@@ -13,18 +13,18 @@ That might have been confusing, but let’s go through the works. This is how yo
 Figure 1
 Awesome! We have a car class, an empty a Car class, but a class nonetheless. 
 To create (instantiate or initialize) a car, we tell the class to make one:
- ![](https://photos.app.goo.gl/SW8uEDLeieaWqdvn7http://)
+ ![](https://photos.app.goo.gl/SW8uEDLeieaWqdvn7)
 Figure 2
 In this case, we’ve created a new car and assigned that car to the variable car_1. As of now, we haven’t given the car and attributes or methods so it’s pretty useless, but shown below in Figure 3 and Figure 4 is we want to be able to do with our car - set attributes for the car and get them when we want them.
 Setting instance variables:
- ![](https://photos.app.goo.gl/LYS1ZUEEKxtenBVu6http://)
+ ![](https://photos.app.goo.gl/LYS1ZUEEKxtenBVu6)
 Figure 3
 And calling the instance variable to get the attributes for the car:
- ![](https://photos.app.goo.gl/LYS1ZUEEKxtenBVu6http://)
+ ![](https://photos.app.goo.gl/LYS1ZUEEKxtenBVu6)
 Figure 4
 
 To be able to do this, instance variables have to be defined:
- ![](https://photos.app.goo.gl/JH9PqzpauYb4aKmw5http://)
+ ![](https://photos.app.goo.gl/JH9PqzpauYb4aKmw5)
 Figure 5
 Instance variables have a @ in front of them, to differentiate from local variables which cannot be used across instance methods; the scope of local variables will be contained in the scope in which they are defined while instance variables can be called from all the instance methods. Before we can start interacting with the instance variables like we did in Figure 3 and Figure 4, we need to create some instance method. In Object Oriented Programming this is either called getter and setters OR readers and writers because they’re made to do just that. When we write car_1.make = “Honda”, we are actually calling a method called make= on car_1, to set the value to “Honda” and when we want to get the make that is set, we need a get method, make, to call on car_1 to reveal the instance variable to us.
 
