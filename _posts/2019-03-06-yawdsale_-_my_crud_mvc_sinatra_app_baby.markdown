@@ -10,23 +10,28 @@ YawdSale is a simple application – users can sign up for an account, and after
 Rough Process:
 When I was working on this project, I was all over the place – there were days where I obsessed over html/css even though there weren’t any requirements on aesthetics; I was unsure to whether I was going include the functionality to add photos, I waited until the end to figure this out. I generally tried to follow this process which I’ve broken down into 4 stages:
 # Stage 1: Set up
+
 * Brainstorm what models and application controllers are needed, what pages are needed by the user to navigate through the site
 * Set up the file/folder structure – creating all MVC folder
 * Creating environment.rb, config.ru,and Rakefile
 * Define the classes for the models and establish relationships
 * Create the migration files and seeds.rb
 * Run rake db:migrate and rake db:seed, play around with the models, verify relationships
+
 # Stage 2: Happy Path
 * Create the controllers needed and add them to config.ru
 * Build out each route and simple show views to display object data
 * Create the ‘new’ routes and views with forms
 * Create the ‘edit’ routes and views with forms (most of which can be copied and pasted from ‘new’)
 * Identify and create the remaining routes and views, in my case, I wanted to have a search route
+
 # Stage 3: Validations and not-so-happy-paths
 * Add validations, conditions that need to met in order to enjoy the happy path, for example, verifying that the user is logged in, verifying whether the correct user is logged in, validating user input, etc. before letting them perform and of the create, read, update and delete functions.
 * Make sure you are redirecting the user to the appropriate pages and prompting them with the correct error messages.
+
 # Stage 4: Facelift
 * Update the views and make the app look more aesthetically pleasing than a text document.
+
 # Some things I’ve learned:
 1)	I spent days trying to set up rack-flash. At one point I decided just to remove it from the app and not deal with it. I had set it up in a previous lab and it had worked perfectly fine, but for the life of me I couldn’t get it working on this project. I came back to it with determination and after entering many permutations with keywords ‘rack-flash across controllers not displaying message Sinatra’ into google, I landed on a comment on some random thread that mentioned that rack-flash required that a :session_secret be set when running your app with shotgun ([](https://groups.google.com/forum/#!topic/sinatrarb/pUFSoyQXyQs)).
 Now it’s simple as just adding gem ‘rack-flash3’ into the file and setting up your ApplicationController like so:
