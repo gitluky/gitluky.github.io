@@ -28,7 +28,7 @@ When I was working on this project, I was all over the place – there were days
 * Make sure you are redirecting the user to the appropriate pages and prompting them with the correct error messages.
 # Stage 4: Facelift
 * Update the views and make the app look more aesthetically pleasing than a text document.
-# Some things I’ve learned:
+# Lessons learned:
 1)	I spent days trying to set up rack-flash. At one point I decided just to remove it from the app and not deal with it. I had set it up in a previous lab and it had worked perfectly fine, but for the life of me I couldn’t get it working on this project. I came back to it with determination and after entering many permutations with keywords ‘rack-flash across controllers not displaying message Sinatra’ into google, I landed on a comment on some random thread that mentioned that rack-flash required that a :session_secret be set when running your app with shotgun ([](https://groups.google.com/forum/#!topic/sinatrarb/pUFSoyQXyQs)).
 Now it’s simple as just adding gem ‘rack-flash3’ into the file and setting up your ApplicationController like so:
 
