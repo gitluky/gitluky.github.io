@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "ToDoLoo: My Rails Project and Lessons Learned"
-date:       2019-07-25 01:08:10 +0000
+date:       2019-07-24 21:08:11 -0400
 permalink:  todoloo_my_rails_project_and_lessons_learned
 ---
 
