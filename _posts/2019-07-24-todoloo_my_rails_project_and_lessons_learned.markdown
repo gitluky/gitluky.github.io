@@ -24,7 +24,7 @@ The steps for each were roughly:
 
 5)	Refactor and move logic over to the models and helpers, and cleaned up the views using partials
 
-I repeated these steps for each functionality: sign-up, authentication (both internal and Facebook OAUTH), and for each controller action for groups, announcements, tasks, and notes. In terms of validations and error handling, I had a separate step at the end to add them in, but in most part I sprinkled them in as I built the app.
+I repeated these steps for each functionality: sign-up, authentication (both internal and Facebook OAUTH), and for each controller action for groups, invitations, announcements, tasks, and notes. In terms of validations and error handling, I had a separate step at the end to add them in, but in most part I sprinkled them in as I built the app.
 I didn’t take the TDD approach for this project, I wasn’t confident with my ability of writing test cases with Rspec and Capybara at all, I just wanted to get started on the project and think about it afterward. In the end, I was able to squeeze in some practice writing a decent amount of feature tests for both happy and negative paths and I feel quite capable now. 
 
 #My Takeaways
