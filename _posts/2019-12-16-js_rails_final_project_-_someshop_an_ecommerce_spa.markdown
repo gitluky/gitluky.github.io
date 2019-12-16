@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "JS/Rails Final Project - SomeShop: An Ecommerce SPA"
-date:       2019-12-16 23:24:30 +0000
+date:       2019-12-16 18:24:31 -0500
 permalink:  js_rails_final_project_-_someshop_an_ecommerce_spa
 ---
 
@@ -30,11 +30,61 @@ $ rails db:migrate
 To customize the controllers, generate new controllers that inherit from Devise’s controllers and specify in routes.rb which controllers to use:
 $ rails generate devise:controllers [scope]
 
-![](https://photos.app.goo.gl/mntSPvfkzKW2vujx9)
+```
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+```
  
 The new controller will be a subclass of your model/scope with commented out actions and methods that you are free to customize. For me, I had to update the create action to create a cart along with the user so there will be a cart available when the user signs in. I also changed the update_resource method to validate the current_password field when updating the user instance.  I also had to stray from the redirects in the original update action to render json back from the AJAX call instead. Lastly, I included the nested shipping address attributes to the params for the user if/when the user decides to add an address when updating their account. My User::RegistrationController ended up looking like this. 
 
-![](https://photos.app.goo.gl/KiSQEogurzhFfAvM6)
+```
+class Users::RegistrationsController < Devise::RegistrationsController
+  respond_to :json
+  layout false
+  before_action :configure_account_update_params, only: [:update]
+
+  def create
+    super
+    if @user.save
+      cart = @user.carts.create()
+      session[:cart_id] = cart.id
+    end
+  end
+
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    resource_updated = update_resource(resource, account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      set_flash_message_for_update(resource, prev_unconfirmed_email)
+      bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+      render json: UserSerializer.new(resource)
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      render json: UserSerializer.new(resource)
+    end
+  end
+
+  protected
+
+  def update_resource(resource, params)
+    if resource.valid_password?(params[:current_password])
+      resource.update_with_password(params)
+    else
+      resource.errors.add(:current_password, params[:current_password].empty? ? :blank : :invalid)
+    end
+  end
+
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [shipping_addresses_attributes: [:street_1, :street_2, :city, :state, :zip_code]])
+  end
+
+end
+```
 
 The tricky thing about using devise is that it can get complicated very quickly when you want to do any sort of customization to the controllers outside of adding fields to the params. I tried to do as little tinkering as possible to avoid breaking anything.
 For more information on how to get started with devise, check out their github page: https://github.com/plataformatec/devise
@@ -92,7 +142,21 @@ It can all be found in Stripe’s documentation: https://stripe.com/docs/payment
 history.pushState() and popstate:
 One of the biggest gripes I initially had about building my SPA ecommerce site is that I couldn’t navigate backwards or forwards between my js manipulated pages. Clicking the back button would just reload the page as it were before any of my js ran. I did some research to find some way to solve this and learned about history.pushState and popstate. With history.pushState, you can manipulate the url and save it in the browser history and listen for a change in the url with popstate. With these two, I completely changed how my application worked – instead directly coding in urls to send in my fetch calls, I first updated the url with pushState and then made my fetch calls by grabbing the url with location.href. In my main js file, I had my popstate listen for urls using regular expressions which called the functions for the fetch requests. 
 
-![](https://photos.app.goo.gl/d6JEvi4U3dtFxxeM6)
+```
+  $(window).on('popstate', (e) => {
+    if (!!location.href.match(/.*carts\/\d+/)) {
+      fetchCart();
+    } else if (!!location.href.match(/.*search\?keywords=/)) {
+      getSearchResults();
+    } else if (!!location.href.match(/.*categories\/\d+\/products$/)) {
+      displayProducts();
+    } else if (!!location.href.match(/.*categories\/\d+\/products\/\d+/)) {
+      displayProduct();
+    } else if (!!location.href.match(/.*users\/edit/)) {
+      fetchAccount();
+    }
+  })
+```
  
 This wraps up on all the new things I’ve discovered while working on this project. I think I ran off the tracks a bit in tinkering with things outside of the actual lessons this project was meant to enforce, which I have a track record of doing, but I learn the best this way.
 
