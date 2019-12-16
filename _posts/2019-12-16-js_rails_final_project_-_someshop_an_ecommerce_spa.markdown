@@ -13,7 +13,8 @@ When the user decides to pay for what is in the cart, an order is created that a
 The shipping address will be created if it does not exist, and associated to the user if not already. 
 The user is then redirected to Stripe for payment processing and on completion is redirected back to the site.
 
-Devise:
+**Devise:**
+
 I used devise to set up the user registration and sessions controllers and views, I did not include any of the other bells and whistles it came with such as the :confirmable, :lockable, :timeoutable, :trackable and :omniauthable :recoverable modules. 
 The cliffnotes for setting up:
 #gemfile
@@ -98,7 +99,8 @@ Deanin:  [https://www.youtube.com/watch?v=A23zCePXe74](https://www.youtube.com/w
 
 I had to add an extra step in order to get the urls, send them in a response to an ajax request and update the DOM with the images with JQuery. To get the urls for the images, I had to use the rails_representation_url method by adding ‘include Rails.application.routes.url_helpers’ to my model.
 
-Stripe:
+**Stripe:**
+
 Intially, I was not going to include payment processing since it was a complete mystery to me, but then I thought it would be a bit odd to have an ecommerce site that doesn’t take payment. After googling around for some time, I thought Stripe would be a good option, specifically Stripe Checkout where the checkout page was already built and all you’d have to do is redirect the customer over to their portal to process the payment. Easier said than done, it took a whole day of trials until it magically clicked and started working.
 To set it up, you include this bit of code into your controller in order to create a Stripe::Checkout::Session object. 
 
@@ -142,7 +144,9 @@ stripe.redirectToCheckout({
 ```
 
 It can all be found in Stripe’s documentation: https://stripe.com/docs/payments/checkout/one-time
-history.pushState() and popstate:
+
+**history.pushState() and popstate:**
+
 One of the biggest gripes I initially had about building my SPA ecommerce site is that I couldn’t navigate backwards or forwards between my js manipulated pages. Clicking the back button would just reload the page as it were before any of my js ran. I did some research to find some way to solve this and learned about history.pushState and popstate. With history.pushState, you can manipulate the url and save it in the browser history and listen for a change in the url with popstate. With these two, I completely changed how my application worked – instead directly coding in urls to send in my fetch calls, I first updated the url with pushState and then made my fetch calls by grabbing the url with location.href. In my main js file, I had my popstate listen for urls using regular expressions which called the functions for the fetch requests. 
 
 ```
