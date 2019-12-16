@@ -91,8 +91,11 @@ For more information on how to get started with devise, check out their github p
 Active Storage:
 At first I was thinking of using something like Paperclip or Carrierwave to manage the product images, but I learned that Paperclip is no longer being supported, and in that case, it might be a better idea to not rely too much on gems and just use what comes in the box with Rails – ActiveStorage. I’ve used ActiveStorage for attaching single images as user avatars in my last project, but was still not fully sure of how it worked, just dismissed it as Rails magic at the time. I had a few issues retrieving the image at and resorted to smashing buttons until it worked, not literally, but close enough.
 This time I learned a little more about ActiveStorage – how to install, upload images, and display them with the help of the mini_magick gem, thanks to Youtube, specifically GoRails and Deanin’s channels:
-GoRails: https://youtu.be/jtKEP_lsLco - Rails 5.2 ActiveStorage Introduction
-Deanin:  https://www.youtube.com/watch?v=A23zCePXe74 - Active Storage For Multiple Images | Validate & Resize | Ruby on Rails 5.2
+
+GoRails: [https://youtu.be/jtKEP_lsLco](https://youtu.be/jtKEP_lsLco) - Rails 5.2 ActiveStorage Introduction
+
+Deanin:  [https://www.youtube.com/watch?v=A23zCePXe74](https://www.youtube.com/watch?v=A23zCePXe74) - Active Storage For Multiple Images | Validate & Resize | Ruby on Rails 5.2
+
 I had to add an extra step in order to get the urls, send them in a response to an ajax request and update the DOM with the images with JQuery. To get the urls for the images, I had to use the rails_representation_url method by adding ‘include Rails.application.routes.url_helpers’ to my model.
 
 Stripe:
