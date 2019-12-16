@@ -94,7 +94,7 @@ This time I learned a little more about ActiveStorage – how to install, upload
 
 GoRails: [https://youtu.be/jtKEP_lsLco](https://youtu.be/jtKEP_lsLco) - Rails 5.2 ActiveStorage Introduction
 
-Deanin:  [https://www.youtube.com/watch?v=A23zCePXe74](https://www.youtube.com/watch?v=A23zCePXe74) - Active Storage For Multiple Images | Validate & Resize | Ruby on Rails 5.2
+Deanin:  [https://www.youtube.com/watch?v=A23zCePXe74](https://www.youtube.com/watch?v=A23zCePXe74) - Active Storage For Multiple Images,  Validate & Resize, Ruby on Rails 5.2
 
 I had to add an extra step in order to get the urls, send them in a response to an ajax request and update the DOM with the images with JQuery. To get the urls for the images, I had to use the rails_representation_url method by adding ‘include Rails.application.routes.url_helpers’ to my model.
 
